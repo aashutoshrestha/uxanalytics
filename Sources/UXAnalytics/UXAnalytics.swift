@@ -9,15 +9,15 @@ enum AnalyticsError: Error{
 open class UXAnalyticsViewController: UIViewController{
     var analytics: UXAnalytics?
     
-    func initAnalytics(){
+    open func initAnalytics(){
         analytics = UXAnalytics()
     }
     
-    func startSession(){
+    open func startSession(){
         analytics?.startSession()
     }
     
-    func stopSession(){
+    open func stopSession(){
         analytics?.stopSession()
     }
     
