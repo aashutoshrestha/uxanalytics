@@ -35,7 +35,9 @@ class UXAnalyticsEvent{
         event.session = sessionId
         do{
             try context.save()
-        }catch{
+            print("Event Saved")
+        }catch let ex{
+            print("Error saving events", ex.localizedDescription)
             throw EventError.eventSaveError
         }
     }

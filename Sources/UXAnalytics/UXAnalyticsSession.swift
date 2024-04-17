@@ -33,6 +33,7 @@ class UXAnalyticsSession{
             try event.recordEvent(sessionId: id.uuidString)
         }
         catch{
+            
             throw SessionError.recordEventError
         }
     }
@@ -55,7 +56,9 @@ class UXAnalyticsSession{
         }
         do{
             try context.save()
-        }catch{
+            print("Session Saved")
+        }catch let ex{
+            print("Error saving sessions", ex.localizedDescription)
             throw SessionError.recordSessionError
         }
     }
