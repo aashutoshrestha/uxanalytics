@@ -21,6 +21,24 @@ open class UXAnalyticsViewController: UIViewController{
         analytics?.stopSession()
     }
     
+    open func getSessionData() throws -> [Sessions]{
+        do{
+            let sessionData = try analytics?.getAnalyticalsDataSessions()
+            return sessionData ?? [Sessions]()
+        }catch{
+            throw AnalyticsError.fetchSessionError
+        }
+    }
+    
+    open func getEventsData(session: String) throws -> [Events]{
+        do{
+            let eventsData = try analytics?.getAnalyticalDataEvents(session: session)
+            return eventsData ?? [Events]()
+        }catch{
+            throw AnalyticsError.fetchEventsError
+        }
+    }
+    
 }
 
 class UXAnalytics{
