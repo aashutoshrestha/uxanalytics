@@ -12,7 +12,7 @@ public enum SessionError: Error{
     case recordEventError
     case recordSessionError
 }
-open class UXAnalyticsSession{
+class UXAnalyticsSession{
     var startTime: Date?
     var endTime: Date?
     init() {
