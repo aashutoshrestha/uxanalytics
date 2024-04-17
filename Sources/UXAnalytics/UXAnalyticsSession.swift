@@ -6,6 +6,11 @@
 //
 
 import Foundation
+enum SessionError: Error{
+    case sessionStartError
+    case sessionEndError
+    case recordEventError
+}
 class UXAnalyticsSession{
     var startTime: Date?
     var endTime: Date?
@@ -13,8 +18,13 @@ class UXAnalyticsSession{
         startTime = Date()
     }
     
-    func recordEvent(event: UXAnalyticsEvent){
-        
+    func recordEvent(event: UXAnalyticsEvent)throws{
+        do {
+            try event.recordEvent()
+        }
+        catch{
+            throw SessionError.recordEventError
+        }
     }
     
     func endSession(){
