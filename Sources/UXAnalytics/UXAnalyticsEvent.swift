@@ -6,11 +6,11 @@
 //
 
 import Foundation
-enum EventError: Error{
+public enum EventError: Error{
     case propertiesParseError
     case eventSaveError
 }
-class UXAnalyticsEvent{
+public class UXAnalyticsEvent{
     var eventName: String
     var eventProperties: [String:String]
     

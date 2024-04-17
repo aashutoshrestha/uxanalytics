@@ -6,12 +6,12 @@
 //
 
 import Foundation
-enum SessionError: Error{
+public enum SessionError: Error{
     case sessionStartError
     case sessionEndError
     case recordEventError
 }
-class UXAnalyticsSession{
+public class UXAnalyticsSession{
     var startTime: Date?
     var endTime: Date?
     func startSession(){
