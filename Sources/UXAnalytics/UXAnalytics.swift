@@ -5,6 +5,7 @@ import CoreData
 enum AnalyticsError: Error{
     case fetchEventsError
     case fetchSessionError
+    case recordEventError
 }
 open class UXAnalyticsViewController: UIViewController{
     var analytics: UXAnalytics?
@@ -19,6 +20,12 @@ open class UXAnalyticsViewController: UIViewController{
     
     open func stopSession(){
         analytics?.stopSession()
+    }
+    
+    func recordEvent(name eventName: String, property eventProperty: [String:String]) throws {
+        do { try analytics?.recordAnalyticsEvent(name: eventName, property: eventProperty)}catch{
+            throw AnalyticsError.recordEventError
+        }
     }
     
     open func getSessionData() throws -> [Sessions]{
@@ -55,6 +62,12 @@ class UXAnalytics{
     
     func stopSession(){
         session?.endSession()
+    }
+    
+    func recordAnalyticsEvent(name eventName: String, property eventProperty: [String:String]) throws {
+        do { try session?.recordEvent(name: eventName, property: eventProperty)}catch{
+            throw AnalyticsError.recordEventError
+        }
     }
     
     func getAnalyticalDataEvents(session: String) throws -> [Events] {
