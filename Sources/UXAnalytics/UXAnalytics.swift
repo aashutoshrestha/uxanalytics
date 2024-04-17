@@ -6,7 +6,17 @@ open class UXAnalyticsViewController: UIViewController{
 }
 
 open class UXAnalytics{
+    var session = UXAnalyticsSession()
+    init() {
+        session.startTime = Date()
+    }
+    deinit {
+        session.endTime = Date()
+    }
     
+    func stopSession(){
+        
+    }
 }
 
 

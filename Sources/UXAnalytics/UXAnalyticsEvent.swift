@@ -22,6 +22,7 @@ open class UXAnalyticsEvent{
     func recordEvent() throws{
         let context = CoreDataManager.shared.context
         let event = Events(context: context)
+        event.id = UUID()
         event.name = eventName
         do {
                 let jsonData = try JSONSerialization.data(withJSONObject: eventProperties)
