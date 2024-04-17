@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "uxanalytics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/aashutoshrestha/uxanalytics",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2f356d7903f7cfbe629e4b152d9ed4b50219efcb"
+      }
+    }
+  ],
+  "version" : 2
+}
