@@ -11,7 +11,7 @@ public enum SessionError: Error{
     case sessionEndError
     case recordEventError
 }
-public class UXAnalyticsSession{
+open class UXAnalyticsSession{
     var startTime: Date?
     var endTime: Date?
     func startSession(){

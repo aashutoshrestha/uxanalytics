@@ -10,7 +10,7 @@ public enum EventError: Error{
     case propertiesParseError
     case eventSaveError
 }
-public class UXAnalyticsEvent{
+open class UXAnalyticsEvent{
     var eventName: String
     var eventProperties: [String:String]
     
