@@ -7,8 +7,7 @@
 
 import Foundation
 import CoreData
-
-public class CoreDataManager {
+class CoreDataManager {
     public static let shared = CoreDataManager()
     
     private init() {}
@@ -27,7 +26,7 @@ public class CoreDataManager {
         return persistentContainer.viewContext
     }
     
-    public func saveContext() {
+    func saveContext() {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

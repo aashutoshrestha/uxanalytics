@@ -19,7 +19,7 @@ class UXAnalyticsEvent{
         self.eventProperties = eventProperties
     }
     
-    func recordEvent() throws{
+    func recordEvent(sessionId: String) throws{
         let context = CoreDataManager.shared.context
         let event = Events(context: context)
         event.id = UUID()
@@ -32,6 +32,7 @@ class UXAnalyticsEvent{
             } catch {
                 throw EventError.propertiesParseError
             }
+        event.session = sessionId
         do{
             try context.save()
         }catch{
