@@ -22,7 +22,7 @@ open class UXAnalyticsViewController: UIViewController{
         analytics?.stopSession()
     }
     
-    func recordEvent(name eventName: String, property eventProperty: [String:String]) throws {
+    open func recordEvent(name eventName: String, property eventProperty: [String:String]) throws {
         do { try analytics?.recordAnalyticsEvent(name: eventName, property: eventProperty)}catch{
             throw AnalyticsError.recordEventError
         }
