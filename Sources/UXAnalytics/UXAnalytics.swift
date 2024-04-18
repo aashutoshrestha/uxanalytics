@@ -53,23 +53,23 @@ open class UXAnalyticsViewController: UIViewController{
     
 }
 
-class UXAnalytics{
+public class UXAnalytics{
     var session : UXAnalyticsSession?
     init() {
     }
     deinit {
     }
     
-    func startSession() {
+    public func startSession() {
         session = UXAnalyticsSession()
          session?.startSession()
     }
     
-    func stopSession(){
+    public func stopSession(){
         session?.endSession()
     }
     
-    func recordAnalyticsEvent(name eventName: String, property eventProperty: [String:String]) throws {
+    public func recordAnalyticsEvent(name eventName: String, property eventProperty: [String:String]) throws {
         do {
             try session?.recordEvent(name: eventName, property: eventProperty)
         }catch let ex{
@@ -78,7 +78,7 @@ class UXAnalytics{
         }
     }
     
-    func getAnalyticalDataEvents(session: String) throws -> [Events] {
+    public func getAnalyticalDataEvents(session: String) throws -> [Events] {
         let context = CoreDataManager.shared.context
         let fetchRequest = NSFetchRequest<Events>(entityName: "Events")
         fetchRequest.predicate = NSPredicate(format: "session == %@", session)
@@ -92,7 +92,7 @@ class UXAnalytics{
         
     }
     
-    func getAnalyticalsDataSessions() throws -> [Sessions] {
+    public func getAnalyticalsDataSessions() throws -> [Sessions] {
         let context = CoreDataManager.shared.context
         let fetchRequest = NSFetchRequest<Sessions>(entityName: "Sessions")
         
