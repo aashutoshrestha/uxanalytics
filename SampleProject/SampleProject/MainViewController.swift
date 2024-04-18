@@ -31,7 +31,8 @@ class MainViewController: UXAnalyticsViewController{
     func recordAnalyticsEvents(name eventName: String, properties eventProperties: [String:String]) throws {
         do{
             try recordEvent(name: eventName, property: eventProperties)
-        }catch{
+        }catch let ex{
+            print("Error recordAnalyticsEvents Sample", ex.localizedDescription)
             throw UXAnalyticsError.recordEventError
         }
     }
@@ -40,6 +41,7 @@ class MainViewController: UXAnalyticsViewController{
         do{
             return try getSessionData()
         }catch let ex{
+            print("Error getSessions Sample", ex.localizedDescription)
             print(ex.localizedDescription)
         }
         return [Sessions]()
@@ -49,6 +51,7 @@ class MainViewController: UXAnalyticsViewController{
         do{
             return try getEventsData(session: session)
         }catch let ex{
+            print("Error getEvents Sample", ex.localizedDescription)
             print(ex.localizedDescription)
         }
         return [Events]()

@@ -14,13 +14,20 @@ class ViewController: MainViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         do{
+            initializeAnalytics()
             print(try getSessions())
-        }catch{
-            
+        }catch let ex{
+            print("Error getting sessions", ex.localizedDescription)
         }
     
     }
     @IBAction func recordEvent(_ sender: Any) {
+        if !self.sessionStarted{
+            let alert = UIAlertController(title: "Session not started", message: "Start session to record event. Obviously event can be recorded on its own, but for this sample, event depends on the session.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default))
+            self.present(alert, animated: true)
+            return
+        }
         let alert = UIAlertController(title: "Select Event", message: "Add Event", preferredStyle: .alert)
         for i in ["Event 1", "Event 2", "Event 3", "Event 4"] {
 //            alert.addAction(UIAlertAction(title: i, style: .Default, handler: doSomething()))
@@ -30,9 +37,10 @@ class ViewController: MainViewController {
                         "date": Date().formatted(),
                     ]
                     try self.recordAnalyticsEvents(name: i, properties: eventProperties)
-//                    print(getEvents(session: <#T##String#>))
-                }catch{
-                    
+//                    print(getEvents(session: T##String))
+                }catch let ex{
+                    print("Error adding events", ex.localizedDescription)
+                    print(ex)
                 }
             }))
         }
@@ -51,8 +59,8 @@ class ViewController: MainViewController {
         
         do{
             print(try getSessions())
-        }catch{
-            
+        }catch let ex{
+            print("Error on session start clicked", ex.localizedDescription)
         }
     }
     
