@@ -13,15 +13,11 @@ class CoreDataManager {
     private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
-        guard let modelURL = Bundle.module.url(forResource: "UXAnalytics", withExtension: "momd", subdirectory: "Sources/UXAnalytics") else {
-            fatalError("Failed to locate model file in bundle.")
-        }
+        guard let url = Bundle.module.url(forResource: "UXAnalytics", withExtension: "mom") else { fatalError("Could not get URL for model: UXAnalytics") }
 
-        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalError("Failed to initialize managed object model from URL: \(modelURL)")
-        }
+        guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError("Could not get model for: \(url)") }
 
-        let persistentContainer = NSPersistentContainer(name: "UXAnalytics", managedObjectModel: managedObjectModel)
+        let persistentContainer = NSPersistentContainer(name: "UXAnalytics", managedObjectModel: model)
 
         // Configure the persistent store coordinator
         let description = NSPersistentStoreDescription()
