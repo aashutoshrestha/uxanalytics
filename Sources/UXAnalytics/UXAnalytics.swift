@@ -23,7 +23,10 @@ open class UXAnalyticsViewController: UIViewController{
     }
     
     open func recordEvent(name eventName: String, property eventProperty: [String:String]) throws {
-        do { try analytics?.recordAnalyticsEvent(name: eventName, property: eventProperty)}catch{
+        do { 
+            try analytics?.recordAnalyticsEvent(name: eventName, property: eventProperty)
+        }catch let ex{
+            print("Error recordEvent", ex.localizedDescription)
             throw AnalyticsError.recordEventError
         }
     }
@@ -32,7 +35,8 @@ open class UXAnalyticsViewController: UIViewController{
         do{
             let sessionData = try analytics?.getAnalyticalsDataSessions()
             return sessionData ?? [Sessions]()
-        }catch{
+        }catch let ex{
+            print("Error fetching session", ex.localizedDescription)
             throw AnalyticsError.fetchSessionError
         }
     }
@@ -41,7 +45,8 @@ open class UXAnalyticsViewController: UIViewController{
         do{
             let eventsData = try analytics?.getAnalyticalDataEvents(session: session)
             return eventsData ?? [Events]()
-        }catch{
+        }catch let ex{
+            print("Error fetching events", ex.localizedDescription)
             throw AnalyticsError.fetchEventsError
         }
     }
@@ -65,7 +70,10 @@ class UXAnalytics{
     }
     
     func recordAnalyticsEvent(name eventName: String, property eventProperty: [String:String]) throws {
-        do { try session?.recordEvent(name: eventName, property: eventProperty)}catch{
+        do {
+            try session?.recordEvent(name: eventName, property: eventProperty)
+        }catch let ex{
+            print("Error recordAnalyticsEvent", ex.localizedDescription)
             throw AnalyticsError.recordEventError
         }
     }
@@ -77,7 +85,8 @@ class UXAnalytics{
         do {
             let events = try context.fetch(fetchRequest)
             return events
-        }catch{
+        }catch let ex{
+            print("Error getAnalyticalDataEvents", ex.localizedDescription)
             throw AnalyticsError.fetchEventsError
         }
         
@@ -90,7 +99,8 @@ class UXAnalytics{
         do {
             let sessions = try context.fetch(fetchRequest)
             return sessions
-        }catch{
+        }catch let ex{
+            print("Error getAnalyticalsDataSessions", ex.localizedDescription)
             throw AnalyticsError.fetchSessionError
         }
     }

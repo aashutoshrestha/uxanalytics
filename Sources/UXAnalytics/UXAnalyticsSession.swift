@@ -32,8 +32,8 @@ class UXAnalyticsSession{
         do {
             try event.recordEvent(sessionId: id.uuidString)
         }
-        catch{
-            
+        catch let ex{
+            print("Error recording event", ex.localizedDescription)
             throw SessionError.recordEventError
         }
     }
@@ -42,6 +42,7 @@ class UXAnalyticsSession{
         do{ 
             try recordSession()
         }catch let ex{
+            print("Error ending session", ex.localizedDescription)
             print (ex.localizedDescription)
         }
     }

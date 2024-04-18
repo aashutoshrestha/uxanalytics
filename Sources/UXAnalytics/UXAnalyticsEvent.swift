@@ -29,7 +29,8 @@ class UXAnalyticsEvent{
                 if let json = String(data: jsonData, encoding: .utf8) {
                     event.properties = json
                 }
-            } catch {
+            } catch let ex{
+                print("Error parsing Event Properties", ex.localizedDescription)
                 throw EventError.propertiesParseError
             }
         event.session = sessionId
