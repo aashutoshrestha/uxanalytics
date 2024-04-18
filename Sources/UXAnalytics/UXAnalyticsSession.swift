@@ -56,9 +56,8 @@ class UXAnalyticsSession{
     func recordSession() throws{
         let context = CoreDataManager.shared.context
         if fetchSessions() != nil && (fetchSessions()?.count ?? 0) > 1 {
-            let fetchRequest: NSFetchRequest<Sessions> = Sessions.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "id == %@", self.id as CVarArg) // Adjust the predicate as per your requirements
-
+            let fetchRequest: NSFetchRequest<Sessions> = NSFetchRequest<Sessions>(entityName: "Sessions")
+            fetchRequest.predicate = NSPredicate(format: "id == %@", self.id as CVarArg) 
             do {
                 let results = try context.fetch(fetchRequest)
                 if let session = results.first {
