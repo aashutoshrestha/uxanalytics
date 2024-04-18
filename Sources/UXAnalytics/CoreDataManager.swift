@@ -13,25 +13,31 @@ class CoreDataManager {
     private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
-        guard let url = Bundle.module.url(forResource: "UXAnalytics", withExtension: "mom") else { fatalError("Could not get URL for model: UXAnalytics") }
-
-        guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError("Could not get model for: \(url)") }
-
-        let persistentContainer = NSPersistentContainer(name: "UXAnalytics", managedObjectModel: model)
-
-        // Configure the persistent store coordinator
-        let description = NSPersistentStoreDescription()
-        description.url = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("UXAnalytics.sqlite")
-        persistentContainer.persistentStoreDescriptions = [description]
-
-        // Load persistent stores
-        persistentContainer.loadPersistentStores { (storeDescription, error) in
-            if let error = error {
-                fatalError("Failed to load persistent stores: \(error)")
-            }
-        }
+//        guard let url = Bundle.module.url(forResource: "UXAnalytics", withExtension: "mom") else { fatalError("Could not get URL for model: UXAnalytics") }
+//
+//        guard let model = NSManagedObjectModel(contentsOf: url) else { fatalError("Could not get model for: \(url)") }
+//
+//        let persistentContainer = NSPersistentContainer(name: "UXAnalytics", managedObjectModel: model)
+//
+//        // Configure the persistent store coordinator
+//        let description = NSPersistentStoreDescription()
+//        description.url = try! FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("UXAnalytics.sqlite")
+//        persistentContainer.persistentStoreDescriptions = [description]
+//
+//        // Load persistent stores
+//        persistentContainer.loadPersistentStores { (storeDescription, error) in
+//            if let error = error {
+//                fatalError("Failed to load persistent stores: \(error)")
+//            }
+//        }
+//        
+//        return persistentContainer
         
-        return persistentContainer
+        let bundle = Bundle.module
+         let modelURL = bundle.url(forResource: "UXAnalytics", withExtension: ".momd")!
+         let model = NSManagedObjectModel(contentsOf: modelURL)!
+         let container = NSPersistentContainer(name: "UXAnalytics", managedObjectModel: model)
+            return container
         /*
         let container = NSPersistentContainer(name: "UXAnalytics")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
