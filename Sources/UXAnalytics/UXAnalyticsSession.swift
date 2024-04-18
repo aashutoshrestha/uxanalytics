@@ -57,7 +57,7 @@ class UXAnalyticsSession{
         let context = CoreDataManager.shared.context
         if fetchSessions() != nil && (fetchSessions()?.count ?? 0) > 1 {
             let fetchRequest: NSFetchRequest<Sessions> = Sessions.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "id == %@", argumentArray: [self.id]) // Adjust the predicate as per your requirements
+            fetchRequest.predicate = NSPredicate(format: "id == %@", self.id as CVarArg) // Adjust the predicate as per your requirements
 
             do {
                 let results = try context.fetch(fetchRequest)
